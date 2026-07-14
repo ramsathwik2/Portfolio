@@ -1,5 +1,5 @@
 import { useState, useRef, Suspense, Component, type ReactNode } from 'react'
-import { HashRouter, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
 import { Canvas } from '@react-three/fiber'
 import { ArrowUpRight, Menu, X } from 'lucide-react'
@@ -143,7 +143,7 @@ function BioSection() {
           className="lg:col-span-3 flex justify-center lg:justify-end"
         >
           <div className="w-64 h-64 sm:w-72 sm:h-72 lg:w-96 lg:h-96 rounded-full overflow-hidden border-2 border-white/10">
-            <img src="/profile.png" alt="Ram Sathwik" className="w-full h-full object-cover" />
+            <img src={`${import.meta.env.BASE_URL}profile.png`} alt="Ram Sathwik" className="w-full h-full object-cover" />
           </div>
         </motion.div>
 
@@ -305,12 +305,12 @@ export default function App() {
   useMotionValueEvent(scrollYProgress, "change", (latest) => { scrollRef.current = latest })
 
   return (
-    <HashRouter>
+    <BrowserRouter basename="/Portfolio">
       <Routes>
         <Route path="/project/:projectId" element={<ProjectDetail />} />
         <Route path="/" element={<MainPage scrollRef={scrollRef} />} />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   )
 }
 
