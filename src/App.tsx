@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, Suspense, Component, type ReactNode } from 'react'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
 import { Canvas } from '@react-three/fiber'
@@ -38,6 +38,14 @@ const projects = [
 ]
 
 const appearSpring = { type: 'spring' as const, bounce: 0.2, duration: 0.4 }
+
+class CanvasErrorBoundary extends Component<{ children: ReactNode }> {
+  state = { hasError: false }
+  static getDerivedStateFromError() { return { hasError: true } }
+  render() {
+    return this.state.hasError ? <div className="fixed inset-0 bg-deep" /> : this.props.children
+  }
+}
 
 function Navbar() {
   const [open, setOpen] = useState(false)
@@ -309,10 +317,14 @@ export default function App() {
 function MainPage({ scrollRef }: { scrollRef: React.MutableRefObject<number> }) {
   return (
     <div className="relative bg-deep min-h-screen">
-      <div className="fixed inset-0 z-0">
-        <Canvas camera={{ position: [0, 0, 0], fov: 75 }}>
-          <Scene scrollRef={scrollRef} />
-        </Canvas>
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <CanvasErrorBoundary>
+          <Suspense fallback={null}>
+            <Canvas camera={{ position: [0, 0, 0], fov: 75 }}>
+              <Scene scrollRef={scrollRef} />
+            </Canvas>
+          </Suspense>
+        </CanvasErrorBoundary>
       </div>
 
       <Navbar />
