@@ -1,5 +1,5 @@
 import { useState, useRef, Suspense, Component, type ReactNode } from 'react'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { HashRouter, Routes, Route, Link } from 'react-router-dom'
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
 import { Canvas } from '@react-three/fiber'
 import { ArrowUpRight, Menu, X } from 'lucide-react'
@@ -305,12 +305,12 @@ export default function App() {
   useMotionValueEvent(scrollYProgress, "change", (latest) => { scrollRef.current = latest })
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/project/:projectId" element={<ProjectDetail />} />
         <Route path="/" element={<MainPage scrollRef={scrollRef} />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
