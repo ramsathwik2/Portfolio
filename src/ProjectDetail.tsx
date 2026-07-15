@@ -84,6 +84,7 @@ const projectData: Record<string, {
     planetColor: '#9F87C3',
     planetSize: 'w-52 h-52 sm:w-60 sm:h-60',
     orbitColor: '#B49ADB',
+    githubUrl: 'https://github.com/ramsathwik2/Skillswap-MVP-demo',
   },
 }
 
