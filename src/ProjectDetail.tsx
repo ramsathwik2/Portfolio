@@ -62,6 +62,29 @@ const projectData: Record<string, {
     orbitColor: '#F5C542',
     githubUrl: 'https://github.com/ramsathwik2/youtube-automation',
   },
+  'skillswap': {
+    title: 'SkillSwap',
+    tagline: 'Verifiable portfolios through peer-reviewed evidence',
+    description: 'A peer-to-peer skill exchange platform with evidence-first portfolio verification — learn from peers, build projects with artifact links, get rubric-based peer reviews, and earn trust scores visible to employers.',
+    longDescription: [
+      'SkillSwap is a platform I pitched at the IIM Bangalore B-Plan competition that reimagines how employers verify talent. Instead of trusting self-reported skills on a resume, SkillSwap requires candidates to link real work artifacts — GitHub repos, Figma files, live demos — and have them reviewed by peers using a structured rubric. Every checkpoint (CP1, CP2) builds toward a "Verified" badge that employers can trust.',
+      'The platform connects learners and teachers in 1-on-1 sessions. Learners post requests for specific skills, teachers accept and conduct live video sessions via WebRTC (MediaRecorder + getUserMedia). Completing a session earns the teacher credits, which can be spent on priority review queuing — creating a self-sustaining incentive economy.',
+      'Projects evolve through versioned iterations with an evidence timeline. Each project checkpoint can be submitted for peer review — reviewers use a rubric (Strong / Good / Needs Work / Weak) with confidence levels and optional notes. A verified checkpoint requires linked evidence artifacts and a high-reputation verifier, creating a anti-fake system.',
+      'Employers browse a ranked leaderboard that combines project verification scores and teaching contributions into a single trust metric. Skill filters allow narrowing by domain (Web Dev, UI/UX, React, DSA, etc.). The platform also includes a portable public portfolio URL that candidates can share directly with recruiters.',
+    ],
+    features: [
+      { title: 'Evidence-First Verification', desc: 'Portfolios require real artifact links (GitHub, Figma, demos). No self-reported claims — every skill is backed by peer-reviewed proof.' },
+      { title: 'Peer Review Rubric', desc: 'Reviewers score using a structured rubric (Strong 90 / Good 75 / Needs Work 60 / Weak 40) with confidence levels and anti-fake rules.' },
+      { title: 'Credit Incentive Economy', desc: 'Earn 5 credits per teaching session. Spend 5 credits on priority review queuing. Self-sustaining marketplace with no external currency.' },
+      { title: 'Video Session Room', desc: 'Built-in WebRTC teaching sessions with camera/mic controls, MediaRecorder session recording, and auto-downloaded proof artifacts.' },
+      { title: 'Checkpoint Progression', desc: 'Projects evolve through CP1 → CP2 → Verified milestones with versioned iteration timeline, evidence links, and system activity log.' },
+      { title: 'Employer Leaderboard', desc: 'Ranked talent directory combining project scores + teaching contributions. Filter by skill domain. Each user has a shareable public portfolio URL.' },
+    ],
+    tech: ['Vanilla JS', 'CSS3', 'HTML5', 'Three.js', 'WebRTC', 'localStorage'],
+    planetColor: '#9F87C3',
+    planetSize: 'w-52 h-52 sm:w-60 sm:h-60',
+    orbitColor: '#B49ADB',
+  },
 }
 
 const springUp = { type: 'spring' as const, bounce: 0.2, duration: 0.6 }

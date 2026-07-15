@@ -25,8 +25,8 @@ const projects = [
     title: 'SkillSwap',
     slug: 'skillswap',
     category: 'Web Platform',
-    description: 'Skills-for-credits marketplace with peer-reviewed portfolios, in-app currency, and employer-visibility ranking.',
-    tech: ['React', 'Node.js', 'PostgreSQL', 'Web3'],
+    description: 'Peer-to-peer skill exchange and verifiable portfolio platform — learn from peers, build evidence-linked projects, get rubric-based peer reviews, and earn trust scores viewable by employers.',
+    tech: ['Vanilla JS', 'CSS3', 'Three.js', 'WebRTC', 'localStorage'],
   },
   {
     title: 'Browser RPG',
