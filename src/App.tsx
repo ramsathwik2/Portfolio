@@ -299,10 +299,40 @@ function ValuesSection() {
   )
 }
 
-export default function App() {
+function ScrollManager({ onScroll }: { onScroll: (v: number) => void }) {
   const { scrollYProgress } = useScroll()
+  useMotionValueEvent(scrollYProgress, "change", (latest) => { onScroll(latest) })
+  return null
+}
+
+class FatalBoundary extends Component<{ children: ReactNode }> {
+  state = { error: null as Error | null }
+  static getDerivedStateFromError(e: Error) { return { error: e } }
+  render() {
+    if (this.state.error) {
+      return <div className="min-h-screen bg-deep flex items-center justify-center px-6">
+        <div className="text-center">
+          <p className="text-xs text-warm-muted mb-4">Something went wrong</p>
+          <p className="text-warm text-sm max-w-md" style={{ fontFamily: 'Inter, sans-serif' }}>
+            {this.state.error.message}
+          </p>
+        </div>
+      </div>
+    }
+    return this.props.children
+  }
+}
+
+export default function App() {
+  return (
+    <FatalBoundary>
+      <RouterApp />
+    </FatalBoundary>
+  )
+}
+
+function RouterApp() {
   const scrollRef = useRef(0)
-  useMotionValueEvent(scrollYProgress, "change", (latest) => { scrollRef.current = latest })
 
   return (
     <BrowserRouter basename="/Portfolio">
@@ -317,6 +347,8 @@ export default function App() {
 function MainPage({ scrollRef }: { scrollRef: React.MutableRefObject<number> }) {
   return (
     <div className="relative bg-deep min-h-screen">
+      <ScrollManager onScroll={(v) => { scrollRef.current = v }} />
+
       <div className="fixed inset-0 z-0 pointer-events-none">
         <CanvasErrorBoundary>
           <Suspense fallback={null}>
