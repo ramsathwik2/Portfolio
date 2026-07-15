@@ -18,8 +18,8 @@ const projects = [
     title: 'AI YouTube Automation',
     slug: 'ai-youtube-automation',
     category: 'AI Pipeline',
-    description: 'Multi-agent pipeline — research, scripting, editing, upload, and analytics agents — that runs end-to-end video production on local infrastructure.',
-    tech: ['Python', 'LangChain', 'FFmpeg', 'Local LLMs'],
+    description: 'End-to-end video production system — research, script generation (Gemini/Ollama), Pillow-based scene rendering (500+ elements), TTS voiceover, and YouTube upload — all running locally.',
+    tech: ['Python', 'Gemini', 'Pillow', 'FFmpeg', 'edge-tts', 'Whisper'],
   },
   {
     title: 'SkillSwap',

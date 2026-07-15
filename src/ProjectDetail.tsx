@@ -38,6 +38,29 @@ const projectData: Record<string, {
     orbitColor: '#64C5FA',
     githubUrl: 'https://github.com/ramsathwik2/67cAM',
   },
+  'ai-youtube-automation': {
+    title: 'AI YouTube Automation',
+    tagline: 'End-to-end video production, fully local',
+    description: 'A complete multi-agent system that researches topics, generates scripts via Gemini/Ollama, renders hand-drawn-style scenes with Pillow, produces AI voiceovers, and uploads to YouTube — all running on your machine with zero cloud costs.',
+    longDescription: [
+      'This is a fully autonomous video production pipeline for philosophy and self-improvement YouTube channels. It discovers trending topics via StackExchange and Reddit APIs, generates retention-optimized scripts through a three-tier AI system (Gemini → Ollama → template fallback), then renders 55–70 scene images per video using a custom Pillow-based drawing engine with 500+ visual elements.',
+      'The drawing engine produces a distinctive hand-drawn aesthetic — 10 background types (room, cosmic, diagram, etc.), 40+ character poses with 12 facial expressions, and 40+ illustrated metaphors. Each script scene generates 3 shot variations (A/B/C) for visual variety. A scene generator with 500+ element registry maps semantic keywords to drawing methods with positional awareness.',
+      'Voiceover is generated via Microsoft edge-tts (en-GB-RyanNeural) with Whisper word-level alignment for perfect scene-to-narration timing. Video assembly uses FFmpeg with the concat demuxer. The uploader auto-generates SEO titles, descriptions, and tags via YouTube Data API v3 with resumable uploads.',
+      'A web dashboard (Python http.server, vanilla HTML/CSS/JS SPA) provides real-time pipeline control, weekly scheduling with Windows Task Scheduler integration, analytics tracking, Instagram promo clip generation, and a built-in video editor for post-processing.',
+    ],
+    features: [
+      { title: 'Multi-Agent Pipeline', desc: 'Research → Scripting → Rendering → Audio → Assembly → Upload. Each phase runs as an independent agent with fallback mechanisms.' },
+      { title: '3-Tier Script Generation', desc: 'Gemini 2.5 Flash (fast), Ollama local LLMs (offline), or template-based (instant). Automatic fallback ensures the pipeline never blocks.' },
+      { title: '500+ Element Drawing Engine', desc: 'Custom Pillow Canvas with 40+ drawing primitives — brains, clocks, hourglasses, lightbulbs, galaxies, chains, stairs, shields, and more.' },
+      { title: 'Retention-Optimized Pacing', desc: '55–70 scenes per video, new visual every 6–8 seconds. Structured emotional arc: Curiosity → Tension → Insight → Resolution.' },
+      { title: 'AI Voiceover + Alignment', desc: 'Microsoft edge-tts neural TTS with Whisper word-level alignment for frame-accurate narration syncing.' },
+      { title: 'Web Dashboard + Scheduling', desc: 'Real-time pipeline dashboard with 40+ API endpoints, 14-slot weekly scheduling, and Windows Task Scheduler automation.' },
+    ],
+    tech: ['Python', 'Gemini API', 'Ollama', 'Pillow', 'FFmpeg', 'edge-tts', 'Whisper', 'YouTube Data API'],
+    planetColor: '#E8A838',
+    planetSize: 'w-52 h-52 sm:w-60 sm:h-60',
+    orbitColor: '#F5C542',
+  },
 }
 
 const springUp = { type: 'spring' as const, bounce: 0.2, duration: 0.6 }
