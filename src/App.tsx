@@ -283,13 +283,29 @@ function ValuesSection() {
           <p className="text-base lg:text-lg text-warm-muted leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
             From that pale blue dot, with purpose.
           </p>
-          <a
-            href="mailto:your.email@example.com"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-sky/10 text-sky text-sm font-medium hover:bg-sky/20 transition-colors"
-            style={{ fontFamily: 'Inter, sans-serif' }}
-          >
-            Get in touch
-          </a>
+          <div className="flex flex-wrap gap-3">
+            <a
+              href="mailto:sathwikram.06@gmail.com"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-sky/10 text-sky text-sm font-medium hover:bg-sky/20 transition-colors"
+              style={{ fontFamily: 'Inter, sans-serif' }}
+            >
+              Get in touch
+            </a>
+            <a
+              href={`${import.meta.env.BASE_URL}resume.pdf`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 text-warm text-sm font-medium hover:bg-white/10 transition-colors border border-white/10"
+              style={{ fontFamily: 'Inter, sans-serif' }}
+            >
+              Resume
+            </a>
+          </div>
+          <div className="flex gap-4 pt-2">
+            <a href="https://www.instagram.com/eighteeneyes/" target="_blank" rel="noopener noreferrer" className="text-sm text-warm-muted hover:text-sky transition-colors" style={{ fontFamily: 'Inter, sans-serif' }}>Instagram</a>
+            <a href="https://www.linkedin.com/in/vanam-ramsathwik-7105261b9/" target="_blank" rel="noopener noreferrer" className="text-sm text-warm-muted hover:text-sky transition-colors" style={{ fontFamily: 'Inter, sans-serif' }}>LinkedIn</a>
+            <a href="mailto:sathwikram.06@gmail.com" className="text-sm text-warm-muted hover:text-sky transition-colors" style={{ fontFamily: 'Inter, sans-serif' }}>Email</a>
+          </div>
           <p className="text-xs text-warm-muted/40 pt-4" style={{ fontFamily: 'Inter, sans-serif' }}>
             &copy; {new Date().getFullYear()} RamSa.
           </p>
