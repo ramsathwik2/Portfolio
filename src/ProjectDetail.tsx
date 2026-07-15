@@ -60,6 +60,7 @@ const projectData: Record<string, {
     planetColor: '#E8A838',
     planetSize: 'w-52 h-52 sm:w-60 sm:h-60',
     orbitColor: '#F5C542',
+    githubUrl: 'https://github.com/ramsathwik2/youtube-automation',
   },
 }
 
