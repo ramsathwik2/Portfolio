@@ -158,7 +158,7 @@ export default function ProjectDetail() {
           >
             <div className="text-center px-4">
               <p className="text-xs tracking-widest text-warm-muted uppercase" style={{ fontFamily: 'Inter, sans-serif' }}>Planet</p>
-              <p className="text-lg sm:text-xl font-medium text-warm mt-1" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>OpenLog</p>
+              <p className="text-lg sm:text-xl font-medium text-warm mt-1" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>{project.title}</p>
             </div>
           </div>
         </motion.div>
