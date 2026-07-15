@@ -12,6 +12,8 @@ const projectData: Record<string, {
   planetColor: string
   planetSize: string
   orbitColor: string
+  githubUrl?: string
+  demoUrl?: string
 }> = {
   'raw-dng-camera': {
     title: 'Raw DNG Camera App',
@@ -34,6 +36,7 @@ const projectData: Record<string, {
     planetColor: '#4A90D9',
     planetSize: 'w-48 h-48 sm:w-56 sm:h-56',
     orbitColor: '#64C5FA',
+    githubUrl: 'https://github.com/ramsathwik2/67cAM',
   },
 }
 
@@ -218,12 +221,16 @@ export default function ProjectDetail() {
             Explore
           </motion.p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a href="#" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 text-warm text-sm font-medium hover:bg-white/10 transition-colors border border-white/10">
-              <Code2 className="w-4 h-4" /> GitHub
-            </a>
-            <a href="#" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-sky/10 text-sky text-sm font-medium hover:bg-sky/20 transition-colors">
-              <ExternalLink className="w-4 h-4" /> Demo Video
-            </a>
+            {project.githubUrl && (
+              <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 text-warm text-sm font-medium hover:bg-white/10 transition-colors border border-white/10">
+                <Code2 className="w-4 h-4" /> GitHub
+              </a>
+            )}
+            {project.demoUrl && (
+              <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-sky/10 text-sky text-sm font-medium hover:bg-sky/20 transition-colors">
+                <ExternalLink className="w-4 h-4" /> Demo Video
+              </a>
+            )}
           </div>
         </div>
       </section>
