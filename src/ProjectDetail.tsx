@@ -86,6 +86,29 @@ const projectData: Record<string, {
     orbitColor: '#B49ADB',
     githubUrl: 'https://github.com/ramsathwik2/Skillswap-MVP-demo',
   },
+  'browser-rpg': {
+    title: 'Eighteeneyes',
+    tagline: 'A game that teaches video editing through play',
+    description: 'A Godot 4.7 top-down adventure where you walk around a map, enter buildings, and complete video-editing missions at an in-game computer workstation. Still in active development.',
+    longDescription: [
+      'Eighteeneyes is a Godot 4.7 prototype that teaches video editing through an interactive top-down adventure game. Instead of tutorials or courses, you learn by doing — exploring a small 2D world, entering buildings, and completing editing assignments at an in-game computer.',
+      'The player controls a character assembled from cut-out limb sprites (body, head, hands, legs) with WASD movement and a follow camera. The overworld map features buildings with collision walls, and entering the house transitions you to an interior room with a computer workstation.',
+      'At the computer, you receive editing missions — tasks like "Edit a 10-second cinematic reel using 2 clips. Keep it under 60 seconds. Use trending audio. Deliver cinematic vibes." A task panel UI with start/cancel buttons and a popup shows mission details. The game simulates a real video editor\'s workflow as gameplay.',
+      'Built in Godot 4.7 with GDScript. Movement, scene transitions, and the basic interaction loop are functional. Future plans include a proper task-completion loop, progress tracking, audio, walk animations, and multiple editing missions of increasing complexity.',
+    ],
+    features: [
+      { title: 'Top-Down Exploration', desc: 'WASD movement, follow camera, collision walls. Composite limb character with idle animation.' },
+      { title: 'Scene Transitions', desc: 'Enter buildings via collision triggers. Seamless switching between overworld and interior scenes.' },
+      { title: 'Computer Interaction', desc: 'Proximity-based E key interaction. Context hint label appears when near interactable objects.' },
+      { title: 'Editing Missions', desc: 'Receive video-editing tasks at the in-game computer. Mission popup with detailed requirements.' },
+      { title: 'Task Panel UI', desc: 'Start/cancel buttons, mission popup, planned progress bar for tracking completion.' },
+      { title: 'Teaches Real Editing', desc: 'Missions teach real concepts — clip selection, pacing, audio trends, cinematic composition.' },
+    ],
+    tech: ['Godot 4.7', 'GDScript', 'Pixel Art', 'CharacterBody2D', 'Area2D Triggers'],
+    planetColor: '#6BBF59',
+    planetSize: 'w-52 h-52 sm:w-60 sm:h-60',
+    orbitColor: '#8DD67A',
+  },
 }
 
 const springUp = { type: 'spring' as const, bounce: 0.2, duration: 0.6 }

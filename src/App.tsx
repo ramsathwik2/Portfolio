@@ -32,8 +32,8 @@ const projects = [
     title: 'Browser RPG',
     slug: 'browser-rpg',
     category: 'Game Dev',
-    description: 'A Pokémon-style narrative game that teaches video editing through its storyline.',
-    tech: ['TypeScript', 'Canvas', 'Phaser', 'Vite'],
+    description: 'A Godot 4.7 top-down adventure game that teaches video editing through interactive missions. Explore, enter buildings, and complete editing tasks at an in-game workstation. Still in progress.',
+    tech: ['Godot 4', 'GDScript', 'Pixel Art'],
   },
 ]
 
