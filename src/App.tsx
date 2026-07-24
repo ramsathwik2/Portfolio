@@ -1,8 +1,8 @@
 import { useState, useRef, Suspense, Component, type ReactNode } from 'react'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
+import { motion, AnimatePresence, useScroll, useMotionValueEvent, useSpring } from 'framer-motion'
 import { Canvas } from '@react-three/fiber'
-import { ArrowUpRight, Menu, X } from 'lucide-react'
+import { ArrowUpRight, Menu, X, ChevronDown } from 'lucide-react'
 import Scene from './Scene'
 import ProjectDetail from './ProjectDetail'
 
@@ -36,6 +36,15 @@ const projects = [
     tech: ['Godot 4', 'GDScript', 'Pixel Art'],
   },
 ]
+
+function ScrollProgress() {
+  const { scrollYProgress } = useScroll()
+  const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30 })
+  return (
+    <motion.div style={{ scaleX, backgroundColor: '#64C5FA', transformOrigin: '0% 50%' }}
+      className="fixed top-0 left-0 right-0 z-50 h-0.5" />
+  )
+}
 
 const appearSpring = { type: 'spring' as const, bounce: 0.2, duration: 0.4 }
 
@@ -142,7 +151,7 @@ function BioSection() {
           transition={{ duration: 1 }}
           className="lg:col-span-3 flex justify-center lg:justify-end"
         >
-          <div className="w-64 h-64 sm:w-72 sm:h-72 lg:w-96 lg:h-96 rounded-full overflow-hidden border-2 border-white/10">
+          <div className="w-64 h-64 sm:w-72 sm:h-72 lg:w-96 lg:h-96 rounded-full overflow-hidden border-2 border-white/10 animate-float">
             <img src={`${import.meta.env.BASE_URL}profile.png`} alt="Ram Sathwik" className="w-full h-full object-cover" />
           </div>
         </motion.div>
@@ -175,6 +184,16 @@ function BioSection() {
           </div>
         </motion.div>
       </div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+      >
+        <span className="text-xs text-warm-muted/40 tracking-widest uppercase" style={{ fontFamily: 'DM Sans, sans-serif' }}>Scroll</span>
+        <ChevronDown className="w-4 h-4 text-warm-muted/40 animate-bounce" />
+      </motion.div>
     </section>
   )
 }
@@ -208,10 +227,21 @@ function ProjectsSection() {
               viewport={{ once: true, margin: '-40px' }}
               transition={{ ...appearSpring, delay: i * 0.06 }}
             >
-              <div className="relative rounded-2xl overflow-hidden bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-500 hover:-translate-y-0.5"
+              <div className="relative rounded-2xl overflow-hidden bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-500 hover:-translate-y-0.5 card-tilt"
                 style={{ boxShadow: '0 0 0 1px rgba(255,255,255,0.06), 0 2px 4px rgba(0,0,0,0.2)' }}
-                onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 0 0 1px rgba(100,197,250,0.15), 0 0 20px rgba(100,197,250,0.08), 0 4px 12px rgba(0,0,0,0.3)')}
-                onMouseLeave={e => (e.currentTarget.style.boxShadow = '0 0 0 1px rgba(255,255,255,0.06), 0 2px 4px rgba(0,0,0,0.2)')}>
+                onMouseEnter={e => {
+                  e.currentTarget.style.boxShadow = '0 0 0 1px rgba(100,197,250,0.15), 0 0 20px rgba(100,197,250,0.08), 0 4px 12px rgba(0,0,0,0.3)'
+                }}
+                onMouseMove={e => {
+                  const rect = e.currentTarget.getBoundingClientRect()
+                  const x = (e.clientX - rect.left) / rect.width - 0.5
+                  const y = (e.clientY - rect.top) / rect.height - 0.5
+                  e.currentTarget.style.transform = `perspective(800px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateY(-2px)`
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.boxShadow = '0 0 0 1px rgba(255,255,255,0.06), 0 2px 4px rgba(0,0,0,0.2)'
+                  e.currentTarget.style.transform = 'perspective(800px) rotateY(0deg) rotateX(0deg) translateY(0px)'
+                }}>
                 <div className="p-6 sm:p-8">
                   <div className="flex items-start justify-between mb-4">
                     <span className="text-xs font-medium text-sky bg-sky/10 px-3 py-1 rounded-full">
@@ -268,7 +298,7 @@ function ValuesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-30%' }}
               transition={{ duration: 0.8, delay: i * 0.1 }}
-              className="text-3xl sm:text-4xl lg:text-6xl text-warm font-light"
+              className="text-3xl sm:text-4xl lg:text-6xl font-light gradient-text"
               style={{ fontFamily: 'Playfair Display, Georgia, serif' }}
             >
               {v}
@@ -366,6 +396,7 @@ function RouterApp() {
 function MainPage({ scrollRef }: { scrollRef: React.MutableRefObject<number> }) {
   return (
     <div className="relative bg-deep min-h-screen">
+      <ScrollProgress />
       <ScrollManager onScroll={(v) => { scrollRef.current = v }} />
 
       <div className="fixed inset-0 z-0 pointer-events-none">

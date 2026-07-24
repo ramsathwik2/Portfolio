@@ -60,3 +60,32 @@ body::before {
   background: #64C5FA;
   border-radius: 3px;
 }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #f0ede6 0%, #64C5FA 40%, #a09b94 70%, #f0ede6 100%);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 6s ease-in-out infinite;
+}
+
+.card-tilt {
+  transition: transform 0.1s ease-out, box-shadow 0.3s ease-out;
+  will-change: transform;
+}
