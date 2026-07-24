@@ -157,7 +157,7 @@ export default function ProjectDetail() {
             }}
           >
             <div className="text-center px-4">
-              <p className="text-xs tracking-widest text-warm-muted uppercase" style={{ fontFamily: 'Inter, sans-serif' }}>Planet</p>
+              <p className="text-xs tracking-widest text-warm-muted uppercase" style={{ fontFamily: 'DM Sans, sans-serif' }}>Planet</p>
               <p className="text-lg sm:text-xl font-medium text-warm mt-1" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>{project.title}</p>
             </div>
           </div>
@@ -168,7 +168,7 @@ export default function ProjectDetail() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.8 }}
           className="text-3xl sm:text-4xl lg:text-6xl text-warm font-light text-center max-w-3xl"
-          style={{ fontFamily: 'Playfair Display, Georgia, serif' }}
+style={{ fontFamily: 'Playfair Display, Georgia, serif', letterSpacing: '-0.03em' }}
         >
           {project.title}
         </motion.h1>
@@ -177,7 +177,7 @@ export default function ProjectDetail() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.9 }}
           className="text-warm-muted text-sm sm:text-base mt-4 text-center"
-          style={{ fontFamily: 'Inter, sans-serif' }}
+          style={{ fontFamily: 'DM Sans, sans-serif' }}
         >
           {project.tagline}
         </motion.p>
@@ -191,11 +191,11 @@ export default function ProjectDetail() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-20%' }}
             className="text-xs text-warm-muted tracking-widest uppercase mb-2"
-            style={{ fontFamily: 'Inter, sans-serif' }}
+            style={{ fontFamily: 'DM Sans, sans-serif' }}
           >
             About This Planet
           </motion.p>
-          <div className="space-y-5 text-warm-muted text-base sm:text-lg leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
+          <div className="space-y-5 text-warm-muted text-base sm:text-lg leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             {project.longDescription.map((p, i) => (
               <motion.p
                 key={i}
@@ -219,7 +219,7 @@ export default function ProjectDetail() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="text-xs text-warm-muted tracking-widest uppercase mb-8 text-center"
-            style={{ fontFamily: 'Inter, sans-serif' }}
+            style={{ fontFamily: 'DM Sans, sans-serif' }}
           >
             Moons (Features)
           </motion.p>
@@ -231,14 +231,17 @@ export default function ProjectDetail() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ ...springUp, delay: i * 0.06 }}
-                className="rounded-2xl border border-white/5 bg-white/[0.02] p-6 hover:border-sky/20 transition-all duration-500"
+                style={{ boxShadow: '0 0 0 1px rgba(255,255,255,0.06), 0 2px 4px rgba(0,0,0,0.2)' }}
+                onMouseEnter={e => { const el = e.currentTarget; el.style.boxShadow = '0 0 0 1px rgba(100,197,250,0.15), 0 0 20px rgba(100,197,250,0.08), 0 4px 12px rgba(0,0,0,0.3)'; el.style.backgroundColor = 'rgba(255,255,255,0.04)' }}
+                onMouseLeave={e => { const el = e.currentTarget; el.style.boxShadow = '0 0 0 1px rgba(255,255,255,0.06), 0 2px 4px rgba(0,0,0,0.2)'; el.style.backgroundColor = '' }}
+                className="rounded-2xl bg-white/[0.02] p-6 transition-all duration-500 hover:-translate-y-0.5"
               >
                 <div className="w-8 h-8 rounded-full flex items-center justify-center mb-4 text-xs font-bold"
                   style={{ backgroundColor: project.orbitColor + '20', color: project.orbitColor }}>
                   {i + 1}
                 </div>
                 <h3 className="text-lg font-medium text-warm mb-2" style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>{f.title}</h3>
-                <p className="text-sm text-warm-muted leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>{f.desc}</p>
+                <p className="text-sm text-warm-muted leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>{f.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -253,7 +256,7 @@ export default function ProjectDetail() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="text-xs text-warm-muted tracking-widest uppercase mb-6"
-            style={{ fontFamily: 'Inter, sans-serif' }}
+            style={{ fontFamily: 'DM Sans, sans-serif' }}
           >
             Orbit Rings (Tech)
           </motion.p>
@@ -287,7 +290,7 @@ export default function ProjectDetail() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="text-xs text-warm-muted tracking-widest uppercase"
-            style={{ fontFamily: 'Inter, sans-serif' }}
+            style={{ fontFamily: 'DM Sans, sans-serif' }}
           >
             Explore
           </motion.p>
@@ -308,7 +311,7 @@ export default function ProjectDetail() {
 
       {/* Back */}
       <div className="pb-12 text-center">
-        <Link to="/" className="text-sm text-warm-muted hover:text-sky transition-colors" style={{ fontFamily: 'Inter, sans-serif' }}>
+        <Link to="/" className="text-sm text-warm-muted hover:text-sky transition-colors" style={{ fontFamily: 'DM Sans, sans-serif' }}>
           &larr; Back to system
         </Link>
       </div>

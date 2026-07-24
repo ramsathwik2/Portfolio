@@ -3,13 +3,16 @@
 @theme {
   --color-deep: #0a0a0a;
   --color-deep-light: #141414;
+  --color-surface-1: #0d0d0d;
+  --color-surface-2: #111111;
   --color-sky: #64C5FA;
   --color-sky-dark: #0099FF;
   --color-warm: #f0ede6;
   --color-warm-muted: #a09b94;
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-mono: 'Space Mono', monospace;
+  --tracking-display: -0.03em;
 }
 
 html {
@@ -18,12 +21,29 @@ html {
 
 body {
   margin: 0;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'DM Sans', system-ui, sans-serif;
   background: #0a0a0a;
   color: #f0ede6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(100, 197, 250, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(100, 197, 250, 0.025) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+*:focus-visible {
+  outline: 2px solid #64C5FA;
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 ::selection {

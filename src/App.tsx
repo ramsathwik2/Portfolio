@@ -119,10 +119,10 @@ function SaganQuoteSection() {
           transition={{ duration: 1, delay: 0.4 }}
           className="lg:pl-12 lg:border-l border-white/10"
         >
-          <p className="text-base lg:text-lg text-warm-muted mb-2" style={{ fontFamily: 'Inter, sans-serif' }}>
+          <p className="text-base lg:text-lg text-warm-muted mb-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             &mdash; Carl Sagan
           </p>
-          <p className="text-sm lg:text-base text-warm-muted/60 italic" style={{ fontFamily: 'Inter, sans-serif' }}>
+          <p className="text-sm lg:text-base text-warm-muted/60 italic" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             <em>Pale Blue Dot</em>, 1994
           </p>
         </motion.div>
@@ -154,12 +154,12 @@ function BioSection() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="lg:col-span-3"
         >
-          <p className="text-xs text-warm-muted tracking-widest uppercase mb-2" style={{ fontFamily: 'Inter, sans-serif' }}>About Me</p>
+          <p className="text-xs text-warm-muted tracking-widest uppercase mb-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>About Me</p>
           <p className="text-4xl sm:text-5xl lg:text-7xl text-warm font-light mb-8"
-            style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
+            style={{ fontFamily: 'Playfair Display, Georgia, serif', letterSpacing: '-0.03em' }}>
             I'm Ram Sathwik
           </p>
-          <div className="space-y-5 text-warm-muted text-base sm:text-lg leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
+          <div className="space-y-5 text-warm-muted text-base sm:text-lg leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             <p>
               I refuse to settle for an ordinary life. I'm driven by a relentless desire
               to build something meaningful — not just a career, but a life that leaves behind
@@ -189,12 +189,12 @@ function ProjectsSection() {
           viewport={{ once: true }}
           className="lg:col-span-2 lg:sticky lg:top-1/3 lg:self-start"
         >
-          <p className="text-xs text-warm-muted tracking-widest uppercase mb-2" style={{ fontFamily: 'Inter, sans-serif' }}>Work</p>
+          <p className="text-xs text-warm-muted tracking-widest uppercase mb-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>Work</p>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl text-warm font-light mb-6"
-            style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
+            style={{ fontFamily: 'Playfair Display, Georgia, serif', letterSpacing: '-0.03em' }}>
             What I've Built
           </h2>
-          <p className="text-warm-muted text-base leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
+          <p className="text-warm-muted text-base leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             Four projects. Four domains. One thread: curiosity.
           </p>
         </motion.div>
@@ -208,7 +208,10 @@ function ProjectsSection() {
               viewport={{ once: true, margin: '-40px' }}
               transition={{ ...appearSpring, delay: i * 0.06 }}
             >
-              <div className="relative rounded-2xl overflow-hidden border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-500 hover:border-sky/20">
+              <div className="relative rounded-2xl overflow-hidden bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-500 hover:-translate-y-0.5"
+                style={{ boxShadow: '0 0 0 1px rgba(255,255,255,0.06), 0 2px 4px rgba(0,0,0,0.2)' }}
+                onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 0 0 1px rgba(100,197,250,0.15), 0 0 20px rgba(100,197,250,0.08), 0 4px 12px rgba(0,0,0,0.3)')}
+                onMouseLeave={e => (e.currentTarget.style.boxShadow = '0 0 0 1px rgba(255,255,255,0.06), 0 2px 4px rgba(0,0,0,0.2)')}>
                 <div className="p-6 sm:p-8">
                   <div className="flex items-start justify-between mb-4">
                     <span className="text-xs font-medium text-sky bg-sky/10 px-3 py-1 rounded-full">
@@ -217,7 +220,7 @@ function ProjectsSection() {
                   </div>
 
                   <h3 className="text-2xl sm:text-3xl font-medium text-warm mb-3"
-                    style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
+style={{ fontFamily: 'Playfair Display, Georgia, serif', letterSpacing: '-0.03em' }}>
                     {project.title}
                   </h3>
                   <p className="text-base text-warm-muted leading-relaxed mb-5">
@@ -280,14 +283,14 @@ function ValuesSection() {
           transition={{ delay: 0.6 }}
           className="lg:col-span-2 lg:pl-12 lg:border-l border-white/10 space-y-6"
         >
-          <p className="text-base lg:text-lg text-warm-muted leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
+          <p className="text-base lg:text-lg text-warm-muted leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             From that pale blue dot, with purpose.
           </p>
           <div className="flex flex-wrap gap-3">
             <a
               href="mailto:sathwikram.06@gmail.com"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-sky/10 text-sky text-sm font-medium hover:bg-sky/20 transition-colors"
-              style={{ fontFamily: 'Inter, sans-serif' }}
+              style={{ fontFamily: 'DM Sans, sans-serif' }}
             >
               Get in touch
             </a>
@@ -296,17 +299,17 @@ function ValuesSection() {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 text-warm text-sm font-medium hover:bg-white/10 transition-colors border border-white/10"
-              style={{ fontFamily: 'Inter, sans-serif' }}
+              style={{ fontFamily: 'DM Sans, sans-serif' }}
             >
               Resume
             </a>
           </div>
           <div className="flex gap-4 pt-2">
-            <a href="https://www.instagram.com/eighteeneyes/" target="_blank" rel="noopener noreferrer" className="text-sm text-warm-muted hover:text-sky transition-colors" style={{ fontFamily: 'Inter, sans-serif' }}>Instagram</a>
-            <a href="https://www.linkedin.com/in/vanam-ramsathwik-7105261b9/" target="_blank" rel="noopener noreferrer" className="text-sm text-warm-muted hover:text-sky transition-colors" style={{ fontFamily: 'Inter, sans-serif' }}>LinkedIn</a>
-            <a href="mailto:sathwikram.06@gmail.com" className="text-sm text-warm-muted hover:text-sky transition-colors" style={{ fontFamily: 'Inter, sans-serif' }}>Email</a>
+            <a href="https://www.instagram.com/eighteeneyes/" target="_blank" rel="noopener noreferrer" className="text-sm text-warm-muted hover:text-sky transition-colors" style={{ fontFamily: 'DM Sans, sans-serif' }}>Instagram</a>
+            <a href="https://www.linkedin.com/in/vanam-ramsathwik-7105261b9/" target="_blank" rel="noopener noreferrer" className="text-sm text-warm-muted hover:text-sky transition-colors" style={{ fontFamily: 'DM Sans, sans-serif' }}>LinkedIn</a>
+            <a href="mailto:sathwikram.06@gmail.com" className="text-sm text-warm-muted hover:text-sky transition-colors" style={{ fontFamily: 'DM Sans, sans-serif' }}>Email</a>
           </div>
-          <p className="text-xs text-warm-muted/40 pt-4" style={{ fontFamily: 'Inter, sans-serif' }}>
+          <p className="text-xs text-warm-muted/40 pt-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             &copy; {new Date().getFullYear()} RamSa.
           </p>
         </motion.div>
@@ -329,7 +332,7 @@ class FatalBoundary extends Component<{ children: ReactNode }> {
       return <div className="min-h-screen bg-deep flex items-center justify-center px-6">
         <div className="text-center">
           <p className="text-xs text-warm-muted mb-4">Something went wrong</p>
-          <p className="text-warm text-sm max-w-md" style={{ fontFamily: 'Inter, sans-serif' }}>
+          <p className="text-warm text-sm max-w-md" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             {this.state.error.message}
           </p>
         </div>
