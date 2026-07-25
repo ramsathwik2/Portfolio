@@ -89,3 +89,65 @@ body::before {
   transition: transform 0.1s ease-out, box-shadow 0.3s ease-out;
   will-change: transform;
 }
+
+.section-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(100, 197, 250, 0.15), transparent);
+  width: 60%;
+  max-width: 400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.section-divider::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 7px;
+  background: #64C5FA;
+  border-radius: 50%;
+  filter: blur(3px);
+  opacity: 0.4;
+}
+
+.quote-mark {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(4rem, 10vw, 8rem);
+  line-height: 0.8;
+  color: rgba(100, 197, 250, 0.08);
+  user-select: none;
+}
+
+.top-nav-link {
+  position: relative;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(240, 237, 230, 0.5);
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+.top-nav-link:hover {
+  color: rgba(240, 237, 230, 0.9);
+}
+
+.top-nav-link.active {
+  color: #64C5FA;
+}
+
+.contact-link {
+  position: relative;
+  color: rgba(240, 237, 230, 0.4);
+  transition: color 0.3s ease;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+}
+
+.contact-link:hover {
+  color: #64C5FA;
+}
