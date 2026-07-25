@@ -1,8 +1,8 @@
 import { useState, useRef, Suspense, Component, type ReactNode } from 'react'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
-import { motion, useScroll, useMotionValueEvent, useSpring } from 'framer-motion'
+import { motion, AnimatePresence, useScroll, useMotionValueEvent, useSpring } from 'framer-motion'
 import { Canvas } from '@react-three/fiber'
-import { ArrowUpRight, ChevronDown } from 'lucide-react'
+import { ArrowUpRight, Menu, X, ChevronDown } from 'lucide-react'
 import Scene from './Scene'
 import ProjectDetail from './ProjectDetail'
 
@@ -11,7 +11,6 @@ const projects = [
     title: 'Raw DNG Camera App',
     slug: 'raw-dng-camera',
     category: 'iOS Development',
-    color: '#64C5FA',
     description: 'Bypasses Apple\'s default image processing to capture log-format video at 24fps with real-time Metal GPU-accelerated gamma curves for professional color grading.',
     tech: ['Swift', 'Metal', 'Core Image', 'RAW'],
   },
@@ -19,7 +18,6 @@ const projects = [
     title: 'AI YouTube Automation',
     slug: 'ai-youtube-automation',
     category: 'AI Pipeline',
-    color: '#FFD700',
     description: 'End-to-end video production system — research, script generation (Gemini/Ollama), Pillow-based scene rendering (500+ elements), TTS voiceover, and YouTube upload — all running locally.',
     tech: ['Python', 'Gemini', 'Pillow', 'FFmpeg', 'edge-tts', 'Whisper'],
   },
@@ -27,7 +25,6 @@ const projects = [
     title: 'SkillSwap',
     slug: 'skillswap',
     category: 'Web Platform',
-    color: '#A855F7',
     description: 'Peer-to-peer skill exchange and verifiable portfolio platform — learn from peers, build evidence-linked projects, get rubric-based peer reviews, and earn trust scores viewable by employers.',
     tech: ['Vanilla JS', 'CSS3', 'Three.js', 'WebRTC', 'localStorage'],
   },
@@ -35,7 +32,6 @@ const projects = [
     title: 'Browser RPG',
     slug: 'browser-rpg',
     category: 'Game Dev',
-    color: '#22C55E',
     description: 'A Godot 4.7 top-down adventure game that teaches video editing through interactive missions. Explore, enter buildings, and complete editing tasks at an in-game workstation. Still in progress.',
     tech: ['Godot 4', 'GDScript', 'Pixel Art'],
   },
@@ -61,75 +57,82 @@ class CanvasErrorBoundary extends Component<{ children: ReactNode }> {
 }
 
 function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
-  const { scrollY } = useScroll()
-  useMotionValueEvent(scrollY, "change", (v) => setScrolled(v > 80))
+  const [open, setOpen] = useState(false)
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 sm:px-10 h-16 transition-all duration-500 ${scrolled ? 'bg-[#0a0a0a]/80 backdrop-blur-md' : 'bg-transparent'}`}>
-      <a href="#about" className="text-sm text-warm-muted/60 hover:text-sky transition-colors font-medium" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-        RamSa
-      </a>
-      <div className="flex items-center gap-8">
-        {['About', 'Work', 'Contact'].map((link) => (
-          <a
-            key={link}
-            href={`#${link.toLowerCase()}`}
-            className="top-nav-link"
-            style={{ fontFamily: 'DM Sans, sans-serif' }}
+    <>
+      <button
+        onClick={() => setOpen(true)}
+        className="fixed top-6 right-6 z-50 p-2.5 rounded-full bg-white/5 hover:bg-white/10 transition-colors text-warm"
+        aria-label="Open menu"
+      >
+        <Menu className="w-5 h-5" />
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-50 flex flex-col items-center justify-center"
+            style={{ backgroundColor: '#0a0a0a' }}
           >
-            {link}
-          </a>
-        ))}
-      </div>
-    </nav>
+            <button
+              onClick={() => setOpen(false)}
+              className="absolute top-6 right-6 z-10 p-2.5 rounded-full bg-white/10 hover:bg-white/20 transition-colors text-warm"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <div className="flex flex-col items-center gap-6">
+              {['Work', 'About', 'Contact'].map((link) => (
+                <a
+                  key={link}
+                  href={`#${link.toLowerCase()}`}
+                  onClick={() => setOpen(false)}
+                  className="text-3xl font-medium text-warm hover:text-sky transition-colors"
+                  style={{ fontFamily: 'Playfair Display, Georgia, serif' }}
+                >
+                  {link}
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
 
 function SaganQuoteSection() {
-  const words = "Look again at that dot. That's here. That's home. That's us. On it everyone you love, everyone you know, everyone you ever heard of, every human being who ever was, lived out their lives.".split(' ')
-
   return (
-    <section className="relative z-10 min-h-screen flex items-center justify-center px-6 overflow-hidden">
-      <div className="max-w-4xl mx-auto text-center">
+    <section className="relative z-10 min-h-screen flex items-center justify-center px-6">
+      <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-20%' }}
           transition={{ duration: 1.2 }}
-          className="mb-4"
         >
-          <span className="quote-mark block leading-none">&ldquo;</span>
+          <p className="text-xl sm:text-2xl lg:text-3xl text-warm leading-relaxed font-light italic"
+            style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
+            &ldquo;Look again at that dot. That&rsquo;s here. That&rsquo;s home. That&rsquo;s us. On it everyone you love, everyone you know, everyone you ever heard of, every human being who ever was, lived out their lives.&rdquo;
+          </p>
         </motion.div>
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: '-20%' }}
-          transition={{ duration: 1.5, delay: 0.3 }}
-          className="text-lg sm:text-xl lg:text-2xl text-warm/90 leading-relaxed font-light italic max-w-3xl mx-auto"
-          style={{ fontFamily: 'Playfair Display, Georgia, serif' }}
-        >
-          {words.map((word, i) => (
-            <motion.span
-              key={i}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.6 + i * 0.04 }}
-              className="inline-block mr-[0.3em]"
-            >
-              {word}
-            </motion.span>
-          ))}
-        </motion.p>
+
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: '-20%' }}
-          transition={{ duration: 1, delay: 3 }}
+          transition={{ duration: 1, delay: 0.4 }}
+          className="lg:pl-12 lg:border-l border-white/10"
         >
-          <p className="text-sm sm:text-base text-warm-muted mt-10" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-            &mdash; Carl Sagan, <em>Pale Blue Dot</em>, 1994
+          <p className="text-base lg:text-lg text-warm-muted mb-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+            &mdash; Carl Sagan
+          </p>
+          <p className="text-sm lg:text-base text-warm-muted/60 italic" style={{ fontFamily: 'DM Sans, sans-serif' }}>
+            <em>Pale Blue Dot</em>, 1994
           </p>
         </motion.div>
       </div>
@@ -227,7 +230,7 @@ function ProjectsSection() {
               <div className="relative rounded-2xl overflow-hidden bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-500 hover:-translate-y-0.5 card-tilt"
                 style={{ boxShadow: '0 0 0 1px rgba(255,255,255,0.06), 0 2px 4px rgba(0,0,0,0.2)' }}
                 onMouseEnter={e => {
-                  e.currentTarget.style.boxShadow = `0 0 0 1px rgba(100,197,250,0.15), 0 0 20px rgba(100,197,250,0.08), 0 4px 12px rgba(0,0,0,0.3)`
+                  e.currentTarget.style.boxShadow = '0 0 0 1px rgba(100,197,250,0.15), 0 0 20px rgba(100,197,250,0.08), 0 4px 12px rgba(0,0,0,0.3)'
                 }}
                 onMouseMove={e => {
                   const rect = e.currentTarget.getBoundingClientRect()
@@ -239,7 +242,6 @@ function ProjectsSection() {
                   e.currentTarget.style.boxShadow = '0 0 0 1px rgba(255,255,255,0.06), 0 2px 4px rgba(0,0,0,0.2)'
                   e.currentTarget.style.transform = 'perspective(800px) rotateY(0deg) rotateX(0deg) translateY(0px)'
                 }}>
-                <div style={{ height: '2px', backgroundColor: project.color, opacity: 0.6 }} />
                 <div className="p-6 sm:p-8">
                   <div className="flex items-start justify-between mb-4">
                     <span className="text-xs font-medium text-sky bg-sky/10 px-3 py-1 rounded-full">
@@ -314,71 +316,33 @@ function ValuesSection() {
           <p className="text-base lg:text-lg text-warm-muted leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             From that pale blue dot, with purpose.
           </p>
+          <div className="flex flex-wrap gap-3">
+            <a
+              href="mailto:sathwikram.06@gmail.com"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-sky/10 text-sky text-sm font-medium hover:bg-sky/20 transition-colors"
+              style={{ fontFamily: 'DM Sans, sans-serif' }}
+            >
+              Get in touch
+            </a>
+            <a
+              href={`${import.meta.env.BASE_URL}resume.pdf`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 text-warm text-sm font-medium hover:bg-white/10 transition-colors border border-white/10"
+              style={{ fontFamily: 'DM Sans, sans-serif' }}
+            >
+              Resume
+            </a>
+          </div>
+          <div className="flex gap-4 pt-2">
+            <a href="https://www.instagram.com/eighteeneyes/" target="_blank" rel="noopener noreferrer" className="text-sm text-warm-muted hover:text-sky transition-colors" style={{ fontFamily: 'DM Sans, sans-serif' }}>Instagram</a>
+            <a href="https://www.linkedin.com/in/vanam-ramsathwik-7105261b9/" target="_blank" rel="noopener noreferrer" className="text-sm text-warm-muted hover:text-sky transition-colors" style={{ fontFamily: 'DM Sans, sans-serif' }}>LinkedIn</a>
+            <a href="mailto:sathwikram.06@gmail.com" className="text-sm text-warm-muted hover:text-sky transition-colors" style={{ fontFamily: 'DM Sans, sans-serif' }}>Email</a>
+          </div>
           <p className="text-xs text-warm-muted/40 pt-4" style={{ fontFamily: 'DM Sans, sans-serif' }}>
             &copy; {new Date().getFullYear()} RamSa.
           </p>
         </motion.div>
-      </div>
-    </section>
-  )
-}
-
-function ContactSection() {
-  return (
-    <section id="contact" className="relative z-10 min-h-screen flex items-center justify-center px-6">
-      <div className="w-full max-w-3xl mx-auto text-center">
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-20%' }}
-          transition={{ duration: 0.6 }}
-          className="text-xs text-warm-muted tracking-widest uppercase mb-4"
-          style={{ fontFamily: 'DM Sans, sans-serif' }}
-        >
-          Get in touch
-        </motion.p>
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-20%' }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="text-4xl sm:text-5xl lg:text-7xl text-warm font-light mb-8"
-          style={{ fontFamily: 'Playfair Display, Georgia, serif', letterSpacing: '-0.03em' }}
-        >
-          Say hello
-        </motion.h2>
-        <motion.a
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-20%' }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          href="mailto:sathwikram.06@gmail.com"
-          className="text-xl sm:text-2xl text-sky hover:text-warm transition-colors inline-block mb-12"
-          style={{ fontFamily: 'DM Sans, sans-serif' }}
-        >
-          sathwikram.06@gmail.com
-        </motion.a>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-20%' }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="flex items-center justify-center gap-8 sm:gap-12"
-        >
-          <a href="https://www.instagram.com/eighteeneyes/" target="_blank" rel="noopener noreferrer" className="contact-link">Instagram</a>
-          <a href="https://www.linkedin.com/in/vanam-ramsathwik-7105261b9/" target="_blank" rel="noopener noreferrer" className="contact-link">LinkedIn</a>
-          <a href={`${import.meta.env.BASE_URL}resume.pdf`} target="_blank" rel="noopener noreferrer" className="contact-link">Resume</a>
-        </motion.div>
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="text-xs text-warm-muted/40 mt-16"
-          style={{ fontFamily: 'DM Sans, sans-serif' }}
-        >
-          &copy; {new Date().getFullYear()} RamSa. From that pale blue dot, with purpose.
-        </motion.p>
       </div>
     </section>
   )
@@ -449,14 +413,9 @@ function MainPage({ scrollRef }: { scrollRef: React.MutableRefObject<number> }) 
 
       <div className="relative z-10">
         <BioSection />
-        <div className="section-divider my-0" />
         <SaganQuoteSection />
-        <div className="section-divider my-0" />
         <ProjectsSection />
-        <div className="section-divider my-0" />
         <ValuesSection />
-        <div className="section-divider my-0" />
-        <ContactSection />
       </div>
     </div>
   )
