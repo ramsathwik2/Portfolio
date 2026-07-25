@@ -46,6 +46,8 @@ function ScrollProgress() {
   )
 }
 
+const appearSpring = { type: 'spring' as const, bounce: 0.2, duration: 0.4 }
+
 class CanvasErrorBoundary extends Component<{ children: ReactNode }> {
   state = { hasError: false }
   static getDerivedStateFromError() { return { hasError: true } }
@@ -108,10 +110,10 @@ function SaganQuoteSection() {
     <section className="relative z-10 min-h-screen flex items-center justify-center px-6">
       <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-20%' }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 1.2 }}
         >
           <p className="text-xl sm:text-2xl lg:text-3xl text-warm leading-relaxed font-light italic"
             style={{ fontFamily: 'Playfair Display, Georgia, serif' }}>
@@ -123,7 +125,7 @@ function SaganQuoteSection() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: '-20%' }}
-          transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 1, delay: 0.4 }}
           className="lg:pl-12 lg:border-l border-white/10"
         >
           <p className="text-base lg:text-lg text-warm-muted mb-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>
@@ -146,7 +148,7 @@ function BioSection() {
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: '-20%' }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 1 }}
           className="lg:col-span-3 flex justify-center lg:justify-end"
         >
           <div className="w-64 h-64 sm:w-72 sm:h-72 lg:w-96 lg:h-96 rounded-full overflow-hidden border-2 border-white/10 animate-float">
@@ -158,7 +160,7 @@ function BioSection() {
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: '-20%' }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, delay: 0.2 }}
           className="lg:col-span-3"
         >
           <p className="text-xs text-warm-muted tracking-widest uppercase mb-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>About Me</p>
@@ -190,7 +192,7 @@ function BioSection() {
         className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
         <span className="text-xs text-warm-muted/40 tracking-widest uppercase" style={{ fontFamily: 'DM Sans, sans-serif' }}>Scroll</span>
-        <ChevronDown className="w-4 h-4 text-warm-muted/40 animate-pulse-subtle" />
+        <ChevronDown className="w-4 h-4 text-warm-muted/40 animate-bounce" />
       </motion.div>
     </section>
   )
@@ -204,7 +206,6 @@ function ProjectsSection() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ ease: [0.16, 1, 0.3, 1] }}
           className="lg:col-span-2 lg:sticky lg:top-1/3 lg:self-start"
         >
           <p className="text-xs text-warm-muted tracking-widest uppercase mb-2" style={{ fontFamily: 'DM Sans, sans-serif' }}>Work</p>
@@ -218,15 +219,15 @@ function ProjectsSection() {
         </motion.div>
 
         <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-5">
-          {projects.map((project) => (
+          {projects.map((project, i) => (
             <motion.div
               key={project.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
-              transition={{ type: 'spring' as const, bounce: 0.2, duration: 0.4 }}
+              transition={{ ...appearSpring, delay: i * 0.06 }}
             >
-              <div className="relative rounded-2xl overflow-hidden bg-white/[0.02] hover:bg-white/[0.04] transition hover:-translate-y-0.5 card-tilt"
+              <div className="relative rounded-2xl overflow-hidden bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-500 hover:-translate-y-0.5 card-tilt"
                 style={{ boxShadow: '0 0 0 1px rgba(255,255,255,0.06), 0 2px 4px rgba(0,0,0,0.2)' }}
                 onMouseEnter={e => {
                   e.currentTarget.style.boxShadow = '0 0 0 1px rgba(100,197,250,0.15), 0 0 20px rgba(100,197,250,0.08), 0 4px 12px rgba(0,0,0,0.3)'
@@ -293,10 +294,10 @@ function ValuesSection() {
           {values.map((v, i) => (
             <motion.p
               key={v}
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-30%' }}
-              transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.8, delay: i * 0.1 }}
               className="text-3xl sm:text-4xl lg:text-6xl font-light gradient-text"
               style={{ fontFamily: 'Playfair Display, Georgia, serif' }}
             >
@@ -306,10 +307,10 @@ function ValuesSection() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ delay: 0.6 }}
           className="lg:col-span-2 lg:pl-12 lg:border-l border-white/10 space-y-6"
         >
           <p className="text-base lg:text-lg text-warm-muted leading-relaxed" style={{ fontFamily: 'DM Sans, sans-serif' }}>
